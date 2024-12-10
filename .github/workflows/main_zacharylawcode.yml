@@ -37,9 +37,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write #This is required for requesting the JWT
 
@@ -56,10 +53,20 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8E525DC004864775895D463EE3392C78 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D91D2C9E755141068A6C86B289628631 }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App (Test Branch)
+        if: github.ref == 'refs/heads/test'
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
+        id: deploy-to-webapp-test
         with:
-          app-name: 'zacharylawcode'
+          app-name: 'zacharylawcodetest' # Replace with your test App Service name
+          slot-name: 'Production'
+          package: .
+
+      - name: Deploy to Azure Web App (Main Branch)
+        if: github.ref == 'refs/heads/main'
+        uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp-main
+        with:
+          app-name: 'zacharylawcode' # Replace with your production App Service name
           slot-name: 'Production'
           package: .
