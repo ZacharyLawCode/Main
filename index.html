@@ -1,59 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Menu</title>
+  <style>
+    /* Basic styling for the menu */
+    .menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu > li {
+      position: relative;
+    }
+    .menu > li > a {
+      display: block;
+      padding: 10px;
+      background-color: #0078D7;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .menu > li > a:hover {
+      background-color: #005EA6;
+    }
+    .submenu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #f0f0f0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .submenu li {
+      padding: 5px 10px;
+    }
+    .submenu li a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+    }
+    .submenu li a:hover {
+      background-color: #ddd;
+    }
+    .menu > li:hover .submenu {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello, World!!!</h1>
-
-    <p>
-        <ul>
-          <li>Core Web Development
-            <ul>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>Flexbox/Grid</li>
-              <li>Vanilla JS</li>
-              <li>DOM Manipulation</li>
-            </ul>
-          </li>
-          <li>Frontend Frameworks and Libraries
-            <ul>
-              <li>React</li>
-              <li>Vue.js</li>
-              <li>Design System Components</li>
-              <li>State Management</li>
-              <li>Javascript Polyfills</li>
-            </ul>
-          </li>
-          <li>Backend Development
-            <ul>
-              <li>Node</li>
-              <li>Web Servers (Nginx/Apache)</li>
-              <li>SQL Databases</li>
-              <li>Caching (Redis)</li>
-              <li>OAuth</li>
-              <li>API Integration (Postman)</li>
-              <li>Async Operations</li>
-            </ul>
-          </li>
-          <li>DevOps and Deployment
-            <ul>
-              <li>Azure (Deployment Pipelines)</li>
-              <li>Docker</li>
-              <li>Version Control</li>
-            </ul>
-          </li>
-          <li>Security
-            <ul>
-              <li>Security (SSL)</li>
-            </ul>
-          </li>
-        </ul>
-      </p>
-      
+  <ul class="menu">
+    <li>
+      <a href="#">Core Web Development</a>
+      <ul class="submenu">
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">Flexbox/Grid</a></li>
+        <li><a href="#">Vanilla JS</a></li>
+        <li><a href="#">DOM Manipulation</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Frontend Frameworks and Libraries</a>
+      <ul class="submenu">
+        <li><a href="#">React</a></li>
+        <li><a href="#">Vue.js</a></li>
+        <li><a href="#">Design System Components</a></li>
+        <li><a href="#">State Management</a></li>
+        <li><a href="#">Javascript Polyfills</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Backend Development</a>
+      <ul class="submenu">
+        <li><a href="#">Node</a></li>
+        <li><a href="#">Web Servers (Nginx/Apache)</a></li>
+        <li><a href="#">SQL Databases</a></li>
+        <li><a href="#">Caching (Redis)</a></li>
+        <li><a href="#">OAuth</a></li>
+        <li><a href="#">API Integration (Postman)</a></li>
+        <li><a href="#">Async Operations</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">DevOps and Deployment</a>
+      <ul class="submenu">
+        <li><a href="#">Azure (Deployment Pipelines)</a></li>
+        <li><a href="#">Docker</a></li>
+        <li><a href="#">Version Control</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Security</a>
+      <ul class="submenu">
+        <li><a href="#">Security (SSL)</a></li>
+      </ul>
+    </li>
+  </ul>
 </body>
 </html>
