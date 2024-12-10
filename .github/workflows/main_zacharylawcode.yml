@@ -62,4 +62,3 @@ jobs:
           app-name: 'zacharylawcode'
           slot-name: 'Production'
           package: .
-          
