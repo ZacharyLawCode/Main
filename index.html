@@ -3,104 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dropdown Menu</title>
+  <title>Navbar Dropdown</title>
   <style>
-    /* Basic styling for the menu */
-    .menu {
-      list-style-type: none;
-      padding: 0;
+    /* Basic reset */
+    body, html {
       margin: 0;
+      padding: 0;
     }
-    .menu > li {
-      position: relative;
+
+    /* Navbar styling */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
     }
-    .menu > li > a {
+
+    .navbar a {
+      float: left;
       display: block;
-      padding: 10px;
-      background-color: #0078D7;
       color: white;
+      text-align: center;
+      padding: 14px 16px;
       text-decoration: none;
-      font-weight: bold;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Dropdown container */
+    .dropdown {
+      float: left;
+      overflow: hidden;
+    }
+
+    /* Dropdown button */
+    .dropdown .dropbtn {
+      background-color: #333;
+      color: white;
+      padding: 14px 16px;
+      font-size: 17px;
+      border: none;
       cursor: pointer;
     }
-    .menu > li > a:hover {
-      background-color: #005EA6;
+
+    .dropdown:hover .dropbtn {
+      background-color: #ddd;
+      color: black;
     }
-    .submenu {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
+
+    /* Dropdown content */
+    .dropdown-content {
       display: none;
       position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #f0f0f0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
     }
-    .submenu li {
-      padding: 5px 10px;
-    }
-    .submenu li a {
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
       text-decoration: none;
-      color: #333;
       display: block;
     }
-    .submenu li a:hover {
+
+    .dropdown-content a:hover {
       background-color: #ddd;
     }
-    .menu > li:hover .submenu {
+
+    /* Show the dropdown on hover */
+    .dropdown:hover .dropdown-content {
       display: block;
     }
   </style>
 </head>
 <body>
-  <ul class="menu">
-    <li>
-      <a href="#">Core Web Development</a>
-      <ul class="submenu">
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">Flexbox/Grid</a></li>
-        <li><a href="#">Vanilla JS</a></li>
-        <li><a href="#">DOM Manipulation</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">Frontend Frameworks and Libraries</a>
-      <ul class="submenu">
-        <li><a href="#">React</a></li>
-        <li><a href="#">Vue.js</a></li>
-        <li><a href="#">Design System Components</a></li>
-        <li><a href="#">State Management</a></li>
-        <li><a href="#">Javascript Polyfills</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">Backend Development</a>
-      <ul class="submenu">
-        <li><a href="#">Node</a></li>
-        <li><a href="#">Web Servers (Nginx/Apache)</a></li>
-        <li><a href="#">SQL Databases</a></li>
-        <li><a href="#">Caching (Redis)</a></li>
-        <li><a href="#">OAuth</a></li>
-        <li><a href="#">API Integration (Postman)</a></li>
-        <li><a href="#">Async Operations</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">DevOps and Deployment</a>
-      <ul class="submenu">
-        <li><a href="#">Azure (Deployment Pipelines)</a></li>
-        <li><a href="#">Docker</a></li>
-        <li><a href="#">Version Control</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">Security</a>
-      <ul class="submenu">
-        <li><a href="#">Security (SSL)</a></li>
-      </ul>
-    </li>
-  </ul>
+
+  <div class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">Core Web Development</button>
+      <div class="dropdown-content">
+        <a href="#">HTML</a>
+        <a href="#">CSS</a>
+        <a href="#">Flexbox/Grid</a>
+        <a href="#">Vanilla JS</a>
+        <a href="#">DOM Manipulation</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Frontend Frameworks and Libraries</button>
+      <div class="dropdown-content">
+        <a href="#">React</a>
+        <a href="#">Vue.js</a>
+        <a href="#">Design System Components</a>
+        <a href="#">State Management</a>
+        <a href="#">Javascript Polyfills</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Backend Development</button>
+      <div class="dropdown-content">
+        <a href="#">Node</a>
+        <a href="#">Web Servers (Nginx/Apache)</a>
+        <a href="#">SQL Databases</a>
+        <a href="#">Caching (Redis)</a>
+        <a href="#">OAuth</a>
+        <a href="#">API Integration (Postman)</a>
+        <a href="#">Async Operations</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">DevOps and Deployment</button>
+      <div class="dropdown-content">
+        <a href="#">Azure (Deployment Pipelines)</a>
+        <a href="#">Docker</a>
+        <a href="#">Version Control</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Security</button>
+      <div class="dropdown-content">
+        <a href="#">Security (SSL)</a>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
