@@ -49,10 +49,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }} # Ensure these secrets are correctly set
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} # Optional, but recommended for clarity
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C5A04C55CA334B33BF472C0457354754 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8E525DC004864775895D463EE3392C78 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_D91D2C9E755141068A6C86B289628631 }}
 
       - name: Deploy to Azure Web App (Test Branch)
         if: github.ref == 'refs/heads/test'
