@@ -14,22 +14,39 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production  # Specify that this job is for the production environment
+    environment: production  # Specify the 'production' environment
 
     steps:
     # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Login to Azure using Managed Identity (No need for client-id, secret, or tenant-id)
+    # Step 2: Set up Node.js environment
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # You can specify the desired Node.js version here
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        npm install
+
+    # Step 4: Build the application (if needed)
+    - name: Build the application
+      run: |
+        npm run build  # Replace this with your specific build command if applicable
+
+    # Step 5: Login to Azure using Managed Identity (No need for client-id, secret, or tenant-id)
     - name: Login to Azure
       uses: azure/login@v2
       with:
         auth-type: 'IDENTITY'  # Use Managed Identity for authentication
 
-    # Step 3: Deploy to Azure Web App
+    # Step 6: Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: "WebApp"  # Name of your Azure Web App
-        package: .  # Path to your project or build output directory
+        package: .  # Path to your project or build output directory (e.g., 'build/' or '.' for the root directory)
+
