@@ -1,38 +1,64 @@
-name: Deploy to Azure Web App
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - zacharylawcode
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  id-token: write  # Required to use OIDC authentication
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    environment: production  # Specifies that this job is targeting the 'production' environment
+  build:
+    runs-on: windows-latest
 
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    # Step 2: Login to Azure using Managed Identity (OIDC)
-    - name: Login to Azure
-      uses: azure/login@v2
-      with:
-        client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"  # The Client ID from your Service Principal or Web App
-        subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # Azure Subscription ID
-        tenant-id: "cff92a55-d9d1-4c28-a61a-5ec524fdb676"  # Azure Tenant ID
-        auth-type: "IDENTITY"  # Use Managed Identity (OIDC authentication)
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
 
-    # Step 3: Deploy to Azure Web App
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: "WebApp"  # The name of your Azure Web App
-        package: .          # Path to your project or build output directory
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+      
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-app
+          path: .
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: node-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"  # The Client ID of your Service Principal
+          tenant-id: "cff92a55-d9d1-4c28-a61a-5ec524fdb676"  # Azure Tenant ID
+          subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # Azure Subscription ID
+
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
+        with:
+          app-name: 'zacharylawcode'
+          slot-name: 'Production'
+          package: .
