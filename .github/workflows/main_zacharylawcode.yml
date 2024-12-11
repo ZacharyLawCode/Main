@@ -33,6 +33,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: zacharylawcode
-        publish-profile: ${{ secrets[github.event.ref == 'refs/heads/main' && 'main' || 'test'] }}
+        publish-profile: ${{ secrets.test }}
+
 
 
