@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write  # Give write permission to id-token, needed for Azure login action
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -32,4 +35,3 @@ jobs:
       with:
         app-name: "WebApp"   # The name of your Azure Web App
         package: .           # Path to your project or build output directory
-
