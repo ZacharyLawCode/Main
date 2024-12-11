@@ -16,6 +16,8 @@ jobs:
       # Checkout the code from the repository
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}  # Explicitly use the current repository
 
       # Setup Node.js version
       - name: Setup Node 20.x
@@ -46,6 +48,8 @@ jobs:
       # Checkout the code from the repository
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}  # Explicitly use the current repository
 
       # Setup Node.js version
       - name: Setup Node 20.x
