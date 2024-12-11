@@ -32,21 +32,16 @@ jobs:
       run: |
         npm install
 
-    # Step 4: Build the application (if needed)
-    - name: Build the application
-      run: |
-        npm run build  # Replace this with your specific build command if applicable
-
-    # Step 5: Login to Azure using Managed Identity (No need for client-id, secret, or tenant-id)
+    # Step 4: Login to Azure using Managed Identity (No need for client-id, secret, or tenant-id)
     - name: Login to Azure
       uses: azure/login@v2
       with:
         auth-type: 'IDENTITY'  # Use Managed Identity for authentication
 
-    # Step 6: Deploy to Azure Web App
+    # Step 5: Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
         app-name: "WebApp"  # Name of your Azure Web App
-        package: .  # Path to your project or build output directory (e.g., 'build/' or '.' for the root directory)
+        package: .  # Path to your project or build output directory (e.g., '.' for the root directory)
 
