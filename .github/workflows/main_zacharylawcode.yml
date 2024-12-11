@@ -11,30 +11,25 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production  # Specifies that this job is targeting the 'production' environment
 
     steps:
     # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Azure CLI
-    - name: Set up Azure CLI
-      uses: azure/setup-azurecli@v1
-
-    # Step 3: Login to Azure using Service Principal
+    # Step 2: Login to Azure using Service Principal
     - name: Login to Azure
       uses: azure/login@v2
       with:
-        client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"   # The Client ID from the Service Principal
-        subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # The Client Secret from the Service Principal
-        tenant-id: "cff92a55-d9d1-4c28-a61a-5ec524fdb676"    # The Tenant ID from Azure AD
-  
+        client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"  # The Client ID from the Service Principal
+        subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # The Azure Subscription ID
+        tenant-id: "cff92a55-d9d1-4c28-a61a-5ec524fdb676"  # The Tenant ID from Azure AD
 
-    # Step 5: Deploy to Azure Web App
+    # Step 3: Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: WebApp   # The name of your Azure Web App
-        package: .                                  # Path to your project or build output directory
+        app-name: "WebApp"   # The name of your Azure Web App
+        package: .           # Path to your project or build output directory
 
-          
