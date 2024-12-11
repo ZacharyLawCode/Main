@@ -37,11 +37,13 @@ jobs:
       uses: azure/login@v2
       with:
         auth-type: 'IDENTITY'  # Use Managed Identity for authentication
+        subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # Your Azure Subscription ID
 
     # Step 5: Deploy to Azure Web App
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: "WebApp"  # Name of your Azure Web App
+        app-name: "YourAppServiceName"  # Name of your Azure Web App
         package: .  # Path to your project or build output directory (e.g., '.' for the root directory)
+
 
