@@ -34,7 +34,7 @@ jobs:
       - name: 'Run Azure webapp deploy action using test publish profile'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: zacharylawcode
+          app-name: zacharylawcodetest
           publish-profile: ${{ secrets.test }}  # Test environment publish profile
 
   # Production job
