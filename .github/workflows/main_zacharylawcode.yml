@@ -43,7 +43,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: "YourAppServiceName"  # Name of your Azure Web App
+        app-name: "WebApp"  # Name of your Azure Web App
         package: .  # Path to your project or build output directory (e.g., '.' for the root directory)
 
 
