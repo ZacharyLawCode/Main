@@ -9,26 +9,26 @@ on:
       - main
 
 permissions:
-  id-token: write  # Allow GitHub Actions to get the OIDC token
+  id-token: write  # Required to use OIDC authentication
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production  # Specifies the production environment
+    environment: production  # Specifies that this job is targeting the 'production' environment
 
     steps:
     # Step 1: Checkout the code
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Login to Azure using OIDC
+    # Step 2: Login to Azure using Managed Identity (OIDC)
     - name: Login to Azure
       uses: azure/login@v2
       with:
-        client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"  # The Client ID of the Azure Service Principal or Federated Identity
+        client-id: "3435e6d1-9a82-4450-bd11-eae2c10c2640"  # The Client ID from your Service Principal or Web App
         subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # Azure Subscription ID
         tenant-id: "cff92a55-d9d1-4c28-a61a-5ec524fdb676"  # Azure Tenant ID
-        auth-type: "oauth"  # Using OAuth for OIDC authentication
+        auth-type: "IDENTITY"  # Use Managed Identity (OIDC authentication)
 
     # Step 3: Deploy to Azure Web App
     - name: Deploy to Azure Web App
