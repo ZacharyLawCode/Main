@@ -1,49 +1,29 @@
-name: Deploy to Azure Web App
+# File: .github/workflows/workflow.yml
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-permissions:
-  id-token: write  # This is required for OIDC authentication
+on: push
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: production  # Specify the 'production' environment
-
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+    # checkout the repo
+    - name: 'Checkout Github Action' 
+      uses: actions/checkout@master
 
-    # Step 2: Set up Node.js environment
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Setup Node 10.x
+      uses: actions/setup-node@v1
       with:
-        node-version: '16'  # You can specify the desired Node.js version here
-
-    # Step 3: Install dependencies
-    - name: Install dependencies
+        node-version: '10.x'
+    - name: 'npm install, build, and test'
       run: |
         npm install
+        npm run build --if-present
+        npm run test --if-present
 
-    # Step 4: Login to Azure using Managed Identity (No need for client-id, secret, or tenant-id)
-    - name: Login to Azure
-      uses: azure/login@v2
-      with:
-        auth-type: 'IDENTITY'  # Use Managed Identity for authentication
-        subscription-id: "61f1f024-971a-40fc-9128-59336fc3f014"  # Your Azure Subscription ID
-
-    # Step 5: Deploy to Azure Web App
-    - name: Deploy to Azure Web App
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: "WebApp"  # Name of your Azure Web App
-        package: .  # Path to your project or build output directory (e.g., '.' for the root directory)
+        app-name: zacharylawcode
+        publish-profile: ${{ secrets.test }}
 
 
